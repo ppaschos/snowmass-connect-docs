@@ -1,6 +1,6 @@
-# Welcome to MkDocs
+# SnowMass Connect Documentation
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+SnowMass Connect serves as a portal, which provides hosted job submission services for distributed, high-throughput computing.
 
 ## Commands
 
