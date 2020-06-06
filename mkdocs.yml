@@ -1,1 +1,6 @@
 site_name: SnowMass Connect Documentation
+theme:
+    name: material
+    features:
+        - instant
+        - tabs
