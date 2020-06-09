@@ -1,8 +1,7 @@
 name: Publish Snowmass21 MKDocs via GitHub Pages
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
 
 jobs:
     build:
