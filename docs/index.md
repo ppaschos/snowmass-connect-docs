@@ -1,4 +1,4 @@
-# SnowMass Connect Documentation
+# Snowmass Connect Documentation
 
 SnowMass Connect serves as a portal, which provides hosted job submission services for distributed, high-throughput computing.
 For portal access, visit [https://snowmass21.ci-connect.net](https://snowmass21.ci-connect.net).
