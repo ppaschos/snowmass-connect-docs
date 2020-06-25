@@ -1,7 +1,9 @@
-# Snowmass Connect Documentation
+# Snowmass21 Computing Documentation
 
-SnowMass Connect serves as a portal, which provides hosted job submission services for distributed, high-throughput computing.
-For portal access, visit [https://connect.snowmass21.io/](https://connect.snowmass21.io).
+
+## Getting Started
+
+Snowmass Connect is a job submission service providing access to the Open Science Grid. To sign up, visit [https://connect.snowmass21.io/](https://connect.snowmass21.io).
 
 ## Commands
 
