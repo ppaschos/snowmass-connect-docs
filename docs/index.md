@@ -12,12 +12,25 @@ After you have uploaded your ssh-keys in the Snowmass Connect portal you can con
 `ssh login.snowmass21.io` 
 
 The login node is also a submission node for jobs to the Open Science Grid. Upon login you will in your home directory that has 50GB of quota. 
-Use your home directory to store submission files and scripts. 
+Use your home directory to store submission files and scripts.
 
-## Data placement
+## Transferring Data into and from Connect Storage Origin
 
-Users should place their input data in /collab/user/<user_id>. There's no quota on this filesystem but expect about 10TB available. 
-You can move data to the grid as part of an OSG job submission using the stashcp tool. 
+To transfer data in and out of the Snowmass21 Connect storage, we recommend the use of Globus Connect Portal. 
+Users can access the storage endpoint by authenticating against the Globus collection "OSG Connect CI Logon" using 
+a Globus Connect Personal client. The steps for access are outlined below:
+
+1. Logon with your institutional credentials at http://cilogon.org
+2. Select "Create a Password Protected Certificate". Enter a password and download your certificate.
+3. How to certificate info
+4. Email your DN to paschos@uchicago.org. Upon confirmation you can access the the directory `/stash/osg/collab/user` from 
+Globus Connect. Mention a tutorial. Do we need a CLI example. 
+
+
+## Data for OSG grid jobs
+
+Users should initially place their input data in /collab/user/<user_id>. There's no quota on this filesystem but expect about 10TB available. 
+Data can be transferred to the grid as part of an OSG job submission using the stashcp tool. 
 You can insert the following command in your execution script to move data from your collab space to the remote worker node where your 
 job is running: 
 
@@ -28,6 +41,8 @@ job is running:
 To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
 
 `stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>`
+
+
 
 
 ## Job submissions
