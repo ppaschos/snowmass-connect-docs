@@ -28,7 +28,7 @@ To access storage via Globus online users must have an institutional based grid 
 1. Logon with your institutional credentials at http://cilogon.org
 2. Select "Create a Password Protected Certificate". Enter a password and download your encrypted certificate, named usercred.p12. The certificate can be obtained 
 by using the openssl pcks12 command as: `openssl pkcs12 -in [your-cert-file] -clcerts -nokeys -out usercert.pem` 
-3. Email the output of the command which willl print out your DN (Distinguish Name):  `openssl x509 -in usercert.pem -noout -subject` to paschos@uchicago.edu. 
+3. Email to paschos@uchicago.edu the output of the following command which will print out your DN (Distinguish Name): `openssl x509 -in usercert.pem -noout -subject` 
 
 Once your DN has been entered in the user access list you will be able to access the OSG Connect CI Logon collection with the Globus Connect client by 
 validating with your institution credentials. Navigate to the OSG Snowmass21 Collaborations Connect storage by typing in the Path box `/stash/collab` as shown below:
