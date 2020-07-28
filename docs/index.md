@@ -19,9 +19,7 @@ Use your home directory to store submission files and scripts.
 Scientific data used as input for jobs to the OSG grid should be transferred to the OSG Connect storage allocated for the Snowmass21 project 
 using Globus Online. Instructions on how to set up Globus Connect Personal can be found [here](https://www.globus.org/globus-connect-personal). 
 Access to the OSG Connect storage endpoint is enabled by authenticating against the Globus collection "OSG Connect CI Logon" using the GLobus Connect client. 
-You can search for the collection by name in the search bar of the File Manager
-
-insert image
+You can search for the collection by name in the search bar of the File Manager.
 
 To access storage via Globus online users must have an institutional based grid certificate issued by CILogon. To obtain one follow the steps below:
 
