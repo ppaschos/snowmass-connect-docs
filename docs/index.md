@@ -16,7 +16,7 @@ Once you upload your ssh-keys in the Snowmass Connect portal you can connect to 
 
 You can find your `<user_id>` from your profile on the Snowmass Connect portal. 
 The login node is also a submission node for jobs to the Open Science Grid. Upon login you will land in your home directory `/home/user_id`. Your home 
-directory has 50GB of quota. Use your home directory to store submission files and scripts.
+directory has 50GB of quota. Use your home directory to store job submission files, scripts and code. Do **not** store large files (larger than 300 MB) in your home directory for the purpose of submissions to the OSG. 
 
 ## Transferring Data to and from the OSG Storage
 
