@@ -14,11 +14,11 @@ After you have uploaded your ssh-keys in the Snowmass Connect portal you can con
 The login node is also a submission node for jobs to the Open Science Grid. Upon login you will in your home directory that has 50GB of quota. 
 Use your home directory to store submission files and scripts.
 
-## Transferring Data to and from the OSG Connect Storage
+## Transferring Data to and from the OSG Storage
 
-Scientific data used as input for jobs to the OSG grid should be transferred to the OSG Connect storage allocated for the Snowmass21 project 
+Scientific data used as input for jobs to the OSG grid should be transferred to the OSG storage allocated for the Snowmass21 project 
 using Globus Online. Instructions on how to set up Globus Connect Personal can be found [here](https://www.globus.org/globus-connect-personal). 
-Access to the OSG Connect storage endpoint is enabled by authenticating against the Globus collection "OSG Connect CI Logon" using the GLobus Connect client. 
+Access to the OSG storage endpoint is enabled by authenticating against the Globus collection "OSG Connect CI Logon" using the GLobus Connect client. 
 You can search for the collection by name in the search bar of the File Manager.
 
 To access storage via Globus online users must have an institutional based grid certificate issued by CILogon. To obtain one follow the steps below:
@@ -64,11 +64,9 @@ To transfer data back to your collab space from the remote node that is running 
 
 A typical submission script is inlined below. 
 
-`Universe = Vanilla`
-
-`Executable     = run.sh`
-
-`Requirements = && (HAS_MODULES =?= TRUE)`
+>`Universe = Vanilla`
+>`Executable     = run.sh`
+>`Requirements = && (HAS_MODULES =?= TRUE)`
 
 `Error   = output.err.$(Cluster)-$(Process)`
 
@@ -86,9 +84,8 @@ The file run.sh is a shell executablle script that contains your execution comma
 For small files to and from the grid you can use the HTCondor file transfer method by including the following two lines in the submission 
 script above:
 
-`transfer_input_files = <comma separated files>`
-
-`should_transfer_files = YES`
+`transfer_input_files = <comma separated files>
+should_transfer_files = YES`
 
 Refer to the HTCondor manual for more information on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
 
