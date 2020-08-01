@@ -1,18 +1,22 @@
-# Overview
+# Snowmass Connect
 
+The purpose of this documentation is to provide critical information for researchers with the Snowmass21 collaboration to access
+the Open Science Grid (OSG) via the Snowmass Connect service hosted at the University of Chicago.
 
 ## Getting Started
 
-Snowmass Connect is a job submission service providing access to the Open Science Grid. To sign up, visit [https://connect.snowmass21.io/](https://connect.snowmass21.io).
+Snowmass Connect is a job submission service providing access to the Open Science Grid. To sign up, visit [https://connect.snowmass21.io/](https://connect.snowmass21.io). It is important to upload your ssh-keys following the instructions on the site. The process will create your
+home directory on the Snowmass submit node and grant you access via passwordless ssh.
 
 ## Login to the submit node
 
 After you have uploaded your ssh-keys in the Snowmass Connect portal you can connect to the login node as:
 
-`ssh login.snowmass21.io` 
+`ssh <user_id>@login.snowmass21.io` 
 
-The login node is also a submission node for jobs to the Open Science Grid. Upon login you will in your home directory that has 50GB of quota. 
-Use your home directory to store submission files and scripts.
+You can find your `<user_id>` from your profile on the Snowmass Connect portal. 
+The login node is also a submission node for jobs to the Open Science Grid. Upon login you will land in your home directory `/home/user_id`. Your home 
+directory has 50GB of quota. Use your home directory to store submission files and scripts.
 
 ## Transferring Data to and from the OSG Storage
 
