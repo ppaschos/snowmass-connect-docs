@@ -1,4 +1,4 @@
-# Transferring Data to and from the OSG Storage
+# Transferring Data to OSG Storage
 
 Data used as input for jobs to the OSG grid should be transferred to the OSG storage allocated for the Snowmass21 project
 using Globus Online. Instructions on how to set up Globus Connect Personal can be found 
