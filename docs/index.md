@@ -50,12 +50,12 @@ To transfer files you can select the list files from your local computer and the
 As disussed above, users should place their science input data for processing on the Open Science Grid in /stash/collab/user/<user_id> or /stash/collab/project/snowmass21. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using the stashcp tool. You can insert the following command in your execution script to move data from your collab space to the remote worker node where your 
 job is running: 
 
-    `module load stashcache`
-    `stashcp /osgconnect/collab/user/<user_id>/<input_file> .`
+    module load stashcache
+    stashcp /osgconnect/collab/user/<user_id>/<input_file> .
 
 To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
 
-`stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>`
+    stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
 
 
 
@@ -63,22 +63,22 @@ To transfer data back to your collab space from the remote node that is running 
 
 A typical submission script is inlined below. 
 
-    `Universe = Vanilla`
-    `Executable     = run.sh`
-    `Requirements = && (HAS_MODULES =?= TRUE)`
-    `Error   = output.err.$(Cluster)-$(Process)`
-    `Output  = output.out.$(Cluster)-$(Process)`
-    `Log     = output.log.$(Cluster)`
-    `WhenToTransferOutput = ON_EXIT`
-    `+ProjectName="snowmass21"`
-    `Queue 1`
+    Universe = Vanilla
+    Executable     = run.sh
+    Requirements = && (HAS_MODULES =?= TRUE)
+    Error   = output.err.$(Cluster)-$(Process)
+    Output  = output.out.$(Cluster)-$(Process)
+    Log     = output.log.$(Cluster)
+    WhenToTransferOutput = ON_EXIT
+    +ProjectName="snowmass21"
+    Queue 1
 
 The file run.sh is a shell executablle script that contains your execution commands along with any directives to move the data as noted above. 
 For small files to and from the grid you can use the HTCondor file transfer method by including the following two lines in the submission 
 script above:
 
-    `transfer_input_files = <comma separated files>`
-    `should_transfer_files = YES`
+    transfer_input_files = <comma separated files>
+    should_transfer_files = YES
 
 Refer to the HTCondor manual for more information on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
 
