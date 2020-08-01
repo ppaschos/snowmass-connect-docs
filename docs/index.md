@@ -18,12 +18,23 @@ You can find your `<user_id>` from your profile on the Snowmass Connect portal.
 The login node is also a submission node for jobs to the Open Science Grid. Upon login you will land in your home directory `/home/user_id`. Your home 
 directory has 50GB of quota. Use your home directory to store job submission files, scripts and code. Do **not** store large files (larger than 300 MB) in your home directory for the purpose of submissions to the OSG. 
 
+The Snowmass login node provides a service to the users of the collaboration in the following ways:
+
+1. Provide users a gateway to the OpenScience Grid in order to 
+run their production computational workflows via job submissions to the OSG HTCondor pool
+2. Provide access to the OSG Storage at the University of Chicago where users can store input files for jobs to the grid and 
+output files (results) from their jobs
+3. Provide an environment for the development of OSG appropriate workflows that will leverage distributed High ThroughPut 
+computing. To facilitate such development a list of scientific software is accessible from the login node using `Modules`. You can list availablle 
+module using the `module avail` command. You can load a module with the `module load <module_name>` command. More details on 
+the module enviroment are discussed in [this section](#Data-access-from-OSG-grid).
+
 ## Storage access
 
 [Globus Connect instructions](globus.md)
 
  
-## Job submissions
+## OSG Job submissions
 
 A typical submission script is inlined below. 
 
@@ -50,7 +61,7 @@ script above:
 
 Refer to the HTCondor manual for more information on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
 
-## Data for computational workflows to the OSG grid 
+## Dataaccess from OSG grid 
 
 As disussed above, users should place their science input data for processing on the Open Science Grid in /stash/collab/user/<user_id> or /stash/collab/project/snowmass21. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using the stashcp tool. You can insert the following command in your execution script to move data from your collab space to the remote worker node where your 
 job is running: 
