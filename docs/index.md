@@ -16,7 +16,7 @@ Use your home directory to store submission files and scripts.
 
 ## Transferring Data to and from the OSG Storage
 
-Scientific data used as input for jobs to the OSG grid should be transferred to the OSG storage allocated for the Snowmass21 project 
+Data used as input for jobs to the OSG grid should be transferred to the OSG storage allocated for the Snowmass21 project 
 using Globus Online. Instructions on how to set up Globus Connect Personal can be found [here](https://www.globus.org/globus-connect-personal). 
 Access to the OSG storage endpoint is enabled by authenticating against the Globus collection "OSG Connect CI Logon" using the GLobus Connect client. 
 You can search for the collection by name in the search bar of the File Manager.
@@ -69,16 +69,20 @@ A typical submission script is inlined below.
     Error   = output.err.$(Cluster)-$(Process)
     Output  = output.out.$(Cluster)-$(Process)
     Log     = output.log.$(Cluster)
+    should_transfer_files = YES
     WhenToTransferOutput = ON_EXIT
     +ProjectName="snowmass21"
     Queue 1
 
-The file run.sh is a shell executablle script that contains your execution commands along with any directives to move the data as noted above. 
-For small files to and from the grid you can use the HTCondor file transfer method by including the following two lines in the submission 
+The file run.sh is a shell executablle script that contains the list of commands that executes your workload 
+along with any directives that move data as noted above. By default, this script will use the HTCondor file transfer 
+method to transfer the executable (`run.sh`) to the remote host and the `Error`, `Output` and `Log` 
+files back to user's directory on the submit host. For small files to and from the grid you can use the HTCondor 
+file transfer method by including the following two lines in the submission 
 script above:
 
-    transfer_input_files = <comma separated files>
-    should_transfer_files = YES
+    transfer_input_files = <comma separated files or directories>
+    transfer_output_files = <comma separated files or directories>
 
 Refer to the HTCondor manual for more information on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
 
