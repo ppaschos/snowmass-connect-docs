@@ -48,21 +48,7 @@ On the right panel of the Globus Connect client tool you can search and connect 
 To transfer files you can select the list files from your local computer and then select Start. To transfer files out simply reverse the direction of the process. 
 
  **Important** Users can not access their home directories in the snowmass21 login node over the Globus door. However, users do have access to the /stash/collab directory when they login to login.snowmass21.io. Files can be moved or copied over to their home directory but it is strongly discouraged for files larger than a few MB.
-
-## Data for computational workflows to the OSG grid 
-
-As disussed above, users should place their science input data for processing on the Open Science Grid in /stash/collab/user/<user_id> or /stash/collab/project/snowmass21. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using the stashcp tool. You can insert the following command in your execution script to move data from your collab space to the remote worker node where your 
-job is running: 
-
-    module load stashcache
-    stashcp /osgconnect/collab/user/<user_id>/<input_file> .
-
-To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
-
-    stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
-
-
-
+ 
 ## Job submissions
 
 A typical submission script is inlined below. 
@@ -90,5 +76,14 @@ script above:
 
 Refer to the HTCondor manual for more information on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
 
+## Data for computational workflows to the OSG grid 
 
+As disussed above, users should place their science input data for processing on the Open Science Grid in /stash/collab/user/<user_id> or /stash/collab/project/snowmass21. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using the stashcp tool. You can insert the following command in your execution script to move data from your collab space to the remote worker node where your 
+job is running: 
 
+    module load stashcache
+    stashcp /osgconnect/collab/user/<user_id>/<input_file> .
+
+To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
+
+    stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
