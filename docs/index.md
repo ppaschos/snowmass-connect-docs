@@ -64,21 +64,23 @@ To transfer data back to your collab space from the remote node that is running 
 
 A typical submission script is inlined below. 
 
->`Universe = Vanilla`
->`Executable     = run.sh`
->`Requirements = && (HAS_MODULES =?= TRUE)`
+  `Universe = Vanilla`
+  
+    `Executable     = run.sh`
+  
+    `Requirements = && (HAS_MODULES =?= TRUE)`
 
-`Error   = output.err.$(Cluster)-$(Process)`
+    `Error   = output.err.$(Cluster)-$(Process)`
 
-`Output  = output.out.$(Cluster)-$(Process)`
+    `Output  = output.out.$(Cluster)-$(Process)`
 
-`Log     = output.log.$(Cluster)`
+    `Log     = output.log.$(Cluster)`
 
-`WhenToTransferOutput = ON_EXIT`
+    `WhenToTransferOutput = ON_EXIT`
 
-`+ProjectName="snowmass21"`
+    `+ProjectName="snowmass21"`
 
-`Queue 1`
+    `Queue 1`
 
 The file run.sh is a shell executablle script that contains your execution commands along with any directives to move the data as noted above. 
 For small files to and from the grid you can use the HTCondor file transfer method by including the following two lines in the submission 
