@@ -74,10 +74,10 @@ A typical submission script is inlined below.
     +ProjectName="snowmass21"
     Queue 1
 
-The file run.sh is a shell executablle script that contains the list of commands that executes your workload 
-along with any directives that move data as noted above. By default, this script will use the HTCondor file transfer 
-method to transfer the executable (`run.sh`) to the remote host and the `Error`, `Output` and `Log` 
-files back to user's directory on the submit host. For small files to and from the grid you can use the HTCondor 
+The file run.sh is an executablle script that contains the list of commands that executes your workload 
+along with any directives that move data as noted above. By default, the submission script above will use the HTCondor file transfer 
+method to transfer the `Executable` to the remote host and the `Error`, `Output` and `Log` 
+files back to user's directory on the submit host. Users can small files to and from the grid you can use the HTCondor 
 file transfer method by including the following two lines in the submission 
 script above:
 
