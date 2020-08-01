@@ -10,7 +10,7 @@ home directory on the Snowmass submit node and grant you access via passwordless
 
 ## Login to the submit node
 
-After you have uploaded your ssh-keys in the Snowmass Connect portal you can connect to the login node as:
+Once you upload your ssh-keys in the Snowmass Connect portal you can connect to the login node via passwordless ssh as:
 
 `ssh <user_id>@login.snowmass21.io` 
 
