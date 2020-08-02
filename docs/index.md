@@ -31,12 +31,22 @@ the module enviroment are discussed in [this section](#Data-access-from-OSG-grid
 
 ## Storage access
 
+Users will have access to the following storage locations on the snowmass login node:
+
+1. Home directory. As mentioned, your home directory will have 50GB of storage  available and can
+be used for scripts, submission files and small size data. Home is network mounted on the login node and large input 
+files for jobs on the grid should not be stored here.
+2. Local storage in`/local-scratch`. This is not available for user data at the moment. It will be 
+augmented with additional storage which would enable users to create work directories and submit jobs from there. 
+When it becomes available we will notify the users and update the documentation here.
+3. OSG storage (Ceph) accebible from the login node at `/mnt/ceph/osg/collab`.
+
 [Globus Connect instructions](globus.md)
 
  
-## OSG Job submissions
+## Job submissions to the OSG
 
-A typical submission script is inlined below. 
+A typical HTCondor submission script is inlined below. 
 
     Universe = Vanilla
     Executable     = run.sh
