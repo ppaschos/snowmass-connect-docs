@@ -25,8 +25,8 @@ run their production computational workflows via job submissions to the OSG HTCo
 2. Provide access to the OSG Storage at the University of Chicago where users can store input files for jobs to the grid and 
 output files (results) from their jobs
 3. Provide an environment for the development of OSG appropriate workflows that will leverage distributed High ThroughPut 
-computing. To facilitate such development a list of scientific software is accessible from the login node using `Modules`. You can list availablle 
-module using the `module avail` command. You can load a module with the `module load <module_name>` command. More details on 
+computing. To facilitate such development a list of scientific software is accessible from the login node using `modules`. You can list availablle 
+modules using the `module avail` command. You can load a module with the `module load <module_name>` command. More details on 
 the module enviroment are discussed in [this section](#Data-access-from-OSG-grid).
 
 ## Storage access
