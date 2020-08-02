@@ -39,9 +39,16 @@ files for jobs on the grid should not be stored here.
 2. Local storage in`/local-scratch`. This is not available for user data at the moment. It will be 
 augmented with additional storage which would enable users to create work directories and submit jobs from there. 
 When it becomes available we will notify the users and update the documentation here.
-3. OSG storage (Ceph) accebible from the login node at `/mnt/ceph/osg/collab`.
+3. OSG storage (Ceph) accebible from the login node at `/mnt/ceph/osg/collab`. It is recommended that users store their 
+data there in either of the two subdirectories:  
+* For private user data: `/mnt/ceph/osg/collab/user/<user_id>`  
+* For shared data among the members of the Snowmass21 collaboration:`/mnt/ceph/osg/collab/snowmass21`
 
-[Globus Connect instructions](globus.md)
+Users can transfer data from external institutions to storage on Snowmass Connect using either of three following methods:
+1. scp 
+2. rsync
+3. For large files to OSG storage using Globus Connect. A guide on how to gain access to the Globus door for transfering 
+data to the OSG storage can be found here: [Globus Connect instructions](globus.md)
 
  
 ## Job submissions to the OSG
