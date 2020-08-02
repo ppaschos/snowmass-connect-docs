@@ -97,7 +97,7 @@ https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-
 ensure that these modules are loaded also on the remote worker node. To do so:
 * Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will 
 request a worker node on a site where the OSG modules are available.
-* Load the modules in the executable script, `run.sh` before you invoke your executable code as: `module load module1 module2 ...`
+* Load the modules in the executable script, `run.sh` before you invoke your executable code as: `module load module1 module2`
 2. You must always declare your project name, `+ProjectName="snowmass21"`, in your condor submit file to:
 * Ensure your job is validated for condor to run it on the OSG grid
 * Job statistics are properly collected and displayed at the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
@@ -110,6 +110,7 @@ As disussed above, users should place their input data for processing on the Ope
 anywhere in your condor submit file:
 
     transfer_input_files = <comma separated files or directories>
+    
     transfer_output_files = <comma separated files or directories>
   
 2. Unix tools for datasets less than 1 GB such as rsync can be invoked from your execution script 
@@ -119,11 +120,13 @@ You can insert the following command in your execution script to  move data from
 directory on remote worker node where your job is running: 
 
     module load stashcache
+    
     stashcp /osgconnect/collab/user/<user_id>/<input_file> .
 
 To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
 
     stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
+    
 4. If the filesize of each dataset exceeds 2 GB an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
 for a consultation to discuss if your workflow can benefit from access to a GridFTP door. 
 
