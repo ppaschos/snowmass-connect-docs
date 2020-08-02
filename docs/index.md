@@ -80,14 +80,14 @@ script above:
 
 Refer to the HTCondor manual for more information on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
 
-## Data Management 
+## Data Management and Grid Transfers
 
 As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using four different methods depending on the file size.
 
 1. HTCondor File Transfer for files less than 100 MB.
-2. HTTP and Unix tools for datasets less than 1 GB. Tools like wget, curl rsync can be invoked from your execution script 
+2. Unix tools for datasets less than 1 GB such as rsync can be invoked from your execution script 
 on the remote host to transfer files from `/collab` by connecting to the submit host.
-3. StashCache for files greater than 1 GB. Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
+3. OSG's StashCache for files greater than 1 GB. Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
 You can insert the following command in your execution script to  move data from `/collab/user/<user_id>` to the local
 directory on remote worker node where your job is running: 
 
