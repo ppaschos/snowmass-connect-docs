@@ -64,14 +64,16 @@ A minimal HTCondor submission script, `myjob.submit`, to the OSG is inlined belo
     Log     = output.log.$(Cluster)
     should_transfer_files = YES
     WhenToTransferOutput = ON_EXIT
+    request_cpus = 1
+    request_memory = 1 GB
     +ProjectName="snowmass21"
     Queue 1
 
 Refer to the HTCondor manual for more information on the declared parameters and on customizing your submission scripts: https://htcondor.readthedocs.io/en/stable/users-manual/index.html
 
-When the script above is submitted, the user would request a remote worker node 
+When the script above is submitted, the user would request a remote worker node with 1 core and 1 GB  
 to run the `run.sh` executable. In this case, `run.sh` is a shell script that contains a list of commands 
-that executes your workload on the worker load.  For example: 
+that executes your workload on the worker node.  For example: 
 
     #/bin/bash
     ./code_executable <input_file> <output_file>
@@ -91,20 +93,20 @@ https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-
 
 ### Notable points
 
-1. If your application/code was build or depends on modules used on the snowmass21 login node you must 
+1. If your application/code was built or depends on modules used on the snowmass21 login node you must 
 ensure that these modules are loaded also on the remote worker node. To do so:
 * Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will 
 request a worker node on a site where the OSG modules are available.
 * Load the modules in the executable script, `run.sh` before you invoke your executable code as: `module load module1 module2 ...`
 2. You must always declare your project name, `+ProjectName="snowmass21"`, in your condor submit file to:
 * Ensure your job is validated for condor to run it on the OSG grid
-* Job statistics is properly collected and displayed at the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
+* Job statistics are properly collected and displayed at the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
 
 ## Data Management and Grid Transfers
 
 As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using four different methods depending on the file size.
 
-1. HTCondor File Transfer for files less than 100 MB. To enable HTCondor File transfers for your input and output data nsert the following parameters
+1. HTCondor File Transfer for files less than 100 MB. To enable HTCondor File transfers for your input and output data insert the following parameters
 anywhere in your condor submit file:
 
     transfer_input_files = <comma separated files or directories>
@@ -122,7 +124,7 @@ directory on remote worker node where your job is running:
 To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
 
     stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
-4. If the filesize each dataset exceeds 2 GB an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
+4. If the filesize of each dataset exceeds 2 GB an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
 for a consultation to discuss if your workflow can benefit from access to a GridFTP door. 
 
 ## Support and Consultation
