@@ -48,7 +48,9 @@ Users can transfer data from external institutions to Snowmass Connect storage u
 1. **scp**. For example: `scp -r <file_or_directory> <user_id>@login.snowmass.io:/collab/user/<user_id>/.` will copy a file or a directory
 from your local machine to your user directory on the OSG storage. The ssh-keys used for your profile on the Snowmass Connect portal 
 must stored on the local machine.
-2. **rsync**.
+2. **rsync**. For example: `rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --progress test.transfer ppaschos@login.snowmass21.io:dump/` will copy the `test.transfer` file in the `dump/` directory in your user space. If the directory 
+does not exist, it will be created. As in `scp` the ssh-keys used for your profile on the Snowmass Connect portal 
+must stored on the source machine.
 3. **Globus Connect** to transfer files to OSG storage only. A guide on how to gain access to the Globus door and instructions for transfering 
 data to the OSG storage can be found here: [Globus Connect instructions](globus.md)
 
