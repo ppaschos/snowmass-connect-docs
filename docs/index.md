@@ -39,7 +39,7 @@ files for jobs on the grid should not be stored here.
 2. Local storage in`/local-scratch`. *This is not available for user data at the moment. Additional storage will be*
 *provisioned which would enable users to create work directories and submit jobs from there.*
 *When it becomes available we will notify the users and update the documentation here.*
-3. OSG storage (Ceph) accebible from the login node at `/mnt/ceph/osg/collab`. It is recommended that users store their 
+3. OSG storage (Ceph) accebible from the login node at `/collab`. It is recommended that users store their 
 data there in either of the two subdirectories:  
 * For private user data: `/collab/user/<user_id>`  
 * For shared data among the members of the Snowmass21 collaboration:`/collab/snowmass21`
