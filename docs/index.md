@@ -44,7 +44,7 @@ data there in either of the two subdirectories:
 * For private user data: `/collab/user/<user_id>`  
 * For shared data among the members of the Snowmass21 collaboration:`/collab/snowmass21`
 
-Users can transfer data from external institutions to storage on Snowmass Connect using either of three following methods:
+Users can transfer data from external institutions to Snowmass Connect storage using either of three following methods:
 1. **scp**. For example: `scp -r <file_or_directory> <user_id>@login.snowmass.io:/collab/user/<user_id>/.` will copy a file or a directory
 from your local machine to your user directory on the OSG storage. The ssh-keys used for your profile on the Snowmass Connect portal 
 must stored on the local machine.
