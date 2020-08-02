@@ -44,7 +44,7 @@ data in either of two subdirectories:
 * For private user data: `/collab/user/<user_id>`  
 * For shared data among the members of the Snowmass21 collaboration:`/collab/snowmass21`
 
-Users can transfer data from external institutions to Snowmass Connect storage using either of three following methods:
+Users can transfer data from external institutions to Snowmass Connect storage using any of the three following methods:
 1. **scp**. For example: `scp -r <file_or_directory> <user_id>@login.snowmass.io:/collab/user/<user_id>/.` will copy a file or a directory
 from your local machine to your user directory on the OSG storage. The ssh-keys used for your profile on the Snowmass Connect portal 
 must stored on the local machine.
@@ -55,11 +55,11 @@ data to the OSG storage can be found here: [Globus Connect instructions](globus.
  
 ## Job submissions to the OSG
 
-A typical HTCondor submission script is inlined below. 
+A typical HTCondor submission script to the OSG is inlined below. 
 
     Universe = Vanilla
     Executable     = run.sh
-    Requirements = && (HAS_MODULES =?= TRUE)
+    Requirements = (HAS_MODULES =?= TRUE)
     Error   = output.err.$(Cluster)-$(Process)
     Output  = output.out.$(Cluster)-$(Process)
     Log     = output.log.$(Cluster)
@@ -68,17 +68,21 @@ A typical HTCondor submission script is inlined below.
     +ProjectName="snowmass21"
     Queue 1
 
+Refer to the HTCondor manual for more information on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
+
+In this simple case, the user requests a remote worker node where the module environment is available 
+
 The file run.sh is an executablle script that contains the list of commands that executes your workload 
-along with any directives that move data as noted above. By default, the submission script above will use the HTCondor file transfer 
+along with any directives that move data as noted above. An example 
+By default, the submission script above will use the HTCondor file transfer 
 method to transfer the `Executable` to the remote host and the `Error`, `Output` and `Log` 
-files back to user's directory on the submit host. Users can small files to and from the grid you can use the HTCondor 
+files back to user's directory on the submit host. Users can transfer small files to and from the grid you can use the HTCondor 
 file transfer method by including the following two lines in the submission 
 script above:
 
     transfer_input_files = <comma separated files or directories>
     transfer_output_files = <comma separated files or directories>
 
-Refer to the HTCondor manual for more information on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
 
 ## Data Management and Grid Transfers
 
