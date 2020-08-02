@@ -27,7 +27,7 @@ output files (results) from their jobs
 3. Provide an environment for the development of OSG appropriate workflows that will leverage distributed High ThroughPut 
 computing. To facilitate such development a list of scientific software is accessible from the login node using `modules`. You can list availablle 
 modules using the `module avail` command. You can load a module with the `module load <module_name>` command. More details on 
-the module enviroment are discussed in [this section](#Data-access-from-OSG-grid).
+the module enviroment are discussed in [this section](#Data-Management).
 
 ## Storage access
 
@@ -41,11 +41,11 @@ files for jobs on the grid should not be stored here.
 *When it becomes available we will notify the users and update the documentation here.*
 3. OSG storage (Ceph) accebible from the login node at `/mnt/ceph/osg/collab`. It is recommended that users store their 
 data there in either of the two subdirectories:  
-* For private user data: `/mnt/ceph/osg/collab/user/<user_id>`  
-* For shared data among the members of the Snowmass21 collaboration:`/mnt/ceph/osg/collab/snowmass21`
+* For private user data: `/collab/user/<user_id>`  
+* For shared data among the members of the Snowmass21 collaboration:`/collab/snowmass21`
 
 Users can transfer data from external institutions to storage on Snowmass Connect using either of three following methods:
-1. **scp**. For example: `scp -r <file_or_directory> <user_id>@login.snowmass.io:/mnt/ceph/osg/collab/user/<user_id>/.` will copy a file or a directory
+1. **scp**. For example: `scp -r <file_or_directory> <user_id>@login.snowmass.io:/collab/user/<user_id>/.` will copy a file or a directory
 from your local machine to your user directory on the OSG storage. The ssh-keys used for your profile on the Snowmass Connect portal 
 must stored on the local machine.
 2. **rsync**.
@@ -80,10 +80,16 @@ script above:
 
 Refer to the HTCondor manual for more information on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
 
-## Data access from OSG grid 
+## Data Management 
 
-As disussed above, users should place their science input data for processing on the Open Science Grid in /stash/collab/user/<user_id> or /stash/collab/project/snowmass21. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using the stashcp tool. You can insert the following command in your execution script to move data from your collab space to the remote worker node where your 
-job is running: 
+As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using four different methods depending on the file size.
+
+1. HTCondor File Transfer for files less than 100 MB.
+2. HTTP and Unix tools for datasets less than 1 GB. Tools like wget, curl rsync can be invoked from your execution script 
+on the remote host to transfer files from `/collab` by connecting to the submit host.
+3. StashCache for files greater than 1 GB. Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
+You can insert the following command in your execution script to  move data from `/collab/user/<user_id>` to the local
+directory on remote worker node where your job is running: 
 
     module load stashcache
     stashcp /osgconnect/collab/user/<user_id>/<input_file> .
@@ -91,6 +97,8 @@ job is running:
 To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
 
     stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
+4. If the filesize each dataset exceeds 2 GB an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
+for a consultation to discuss if your workflow can benefit from access to a GridFTP door. 
 
 ## Support and Consultation
 
