@@ -55,7 +55,7 @@ data to the OSG storage can be found here: [Globus Connect instructions](globus.
  
 ## Job submissions to the OSG
 
-A typical HTCondor submission script to the OSG is inlined below. 
+A typical HTCondor submission script, `myjob.submit`, to the OSG is inlined below. 
 
     Universe = Vanilla
     Executable     = run.sh
@@ -68,20 +68,20 @@ A typical HTCondor submission script to the OSG is inlined below.
     +ProjectName="snowmass21"
     Queue 1
 
-Refer to the HTCondor manual for more information on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
+Refer to the HTCondor manual for more information on the declared parameters and on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
 
-In this simple case, the user requests a remote worker node where the module environment is available 
+In the submit script above the user requests a remote worker node to run the `run.sh` executable. In this case, 
+`run.sh` is a script that contains a list of commands that executes your workload 
+along with any directives that move data as shown below:
 
-The file run.sh is an executablle script that contains the list of commands that executes your workload 
-along with any directives that move data as noted above. An example 
+    #/bin/bash
+    module load <module1> <module2> 
+    ./code_executable <input_file> <output_file>
+    <additional commands>
+
 By default, the submission script above will use the HTCondor file transfer 
 method to transfer the `Executable` to the remote host and the `Error`, `Output` and `Log` 
-files back to user's directory on the submit host. Users can transfer small files to and from the grid you can use the HTCondor 
-file transfer method by including the following two lines in the submission 
-script above:
-
-    transfer_input_files = <comma separated files or directories>
-    transfer_output_files = <comma separated files or directories>
+files back to user's directory on the submit host. 
 
 
 ## Data Management and Grid Transfers
@@ -89,6 +89,10 @@ script above:
 As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using four different methods depending on the file size.
 
 1. HTCondor File Transfer for files less than 100 MB.
+
+    transfer_input_files = <comma separated files or directories>
+    transfer_output_files = <comma separated files or directories>
+  
 2. Unix tools for datasets less than 1 GB such as rsync can be invoked from your execution script 
 on the remote host to transfer files from `/collab` by connecting to the submit host.
 3. OSG's StashCache for files greater than 1 GB. Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
