@@ -31,7 +31,7 @@ the module enviroment are discussed in [this section](#Data-access-from-OSG-grid
 
 ## Storage access
 
-Users will have access to the following storage locations on the snowmass login node:
+Users will have access to the following storage locations on the Snowmass login node:
 
 1. Home directory. As mentioned, your home directory will have 50GB of storage  available and can
 be used for scripts, submission files and small size data. Home is network mounted on the login node and large input 
