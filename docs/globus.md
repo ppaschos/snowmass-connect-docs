@@ -6,7 +6,8 @@ using Globus Online. Instructions on how to set up Globus Connect Personal can b
 against the Globus collection "OSG Connect CI Logon" using the GLobus Connect client. 
 You can search for the collection by name in the search bar of the File Manager.
 
-To access storage via Globus online users must have an institutional based grid certificate issued by CILogon. To obtain one follow the steps below:
+In order to access the OSG storage for Snowmass via Globus online, users must have an institutional 
+based grid certificate issued by CILogon. To obtain one follow the steps below:
 
 1. Logon with your institutional credentials at http://cilogon.org
 2. Select "Create a Password Protected Certificate". Enter a password and download your encrypted certificate, named usercred.p12. 
