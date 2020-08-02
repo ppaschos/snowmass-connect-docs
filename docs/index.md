@@ -69,8 +69,9 @@ A minimal HTCondor submission script, `myjob.submit`, to the OSG is inlined belo
 
 Refer to the HTCondor manual for more information on the declared parameters and on customizing your submission scripts: https://htcondor.readthedocs.io/en/stable/users-manual/index.html
 
-In the submit script above, the user requests a remote worker node to run the `run.sh` executable. In this case, 
-`run.sh` is a shell script that contains a list of commands that executes your workload on the worker load.  For example: 
+When the script above is submitted, the user would request a remote worker node 
+to run the `run.sh` executable. In this case, `run.sh` is a shell script that contains a list of commands 
+that executes your workload on the worker load.  For example: 
 
     #/bin/bash
     ./code_executable <input_file> <output_file>
@@ -82,11 +83,19 @@ back to user's directory on the submit host. Users have a number of options to t
 their code executables and input/output files to the remote worker node and is described in the next section.
 
 Users can submit the job script to the OSG via the condor command on the Snowmass login node: 
-`condor_submit myjob.submit`, which will return a unique <JobID>. 
-You use the <JobID> to query the status of your job with `condor_q <JobID>`
+`condor_submit myjob.submit`, which will return a unique `<JobID>` number. 
+You can use the `<JobID>` to query the status of your job with `condor_q <JobID>`
 
 For an introduction on managing your jobs with condor we refer to this presentation by the OSG
 https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf
+
+### Notable points
+
+1. If your application/code was build or depends on modules used on the snowmass21 login node you must 
+ensure that these modules are loaded also on the remote worker node. To do so:
+* Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will 
+request a worker node on a site where the OSG modules are available.
+* Load the modules in the executable script, `run.sh` before you invoke your executable as: `module load module1 module2 ...`
 
 
 ## Data Management and Grid Transfers
