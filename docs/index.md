@@ -59,7 +59,6 @@ A typical HTCondor submission script, `myjob.submit`, to the OSG is inlined belo
 
     Universe = Vanilla
     Executable     = run.sh
-    Requirements = (HAS_MODULES =?= TRUE)
     Error   = output.err.$(Cluster)-$(Process)
     Output  = output.out.$(Cluster)-$(Process)
     Log     = output.log.$(Cluster)
@@ -71,17 +70,18 @@ A typical HTCondor submission script, `myjob.submit`, to the OSG is inlined belo
 Refer to the HTCondor manual for more information on the declared parameters and on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
 
 In the submit script above the user requests a remote worker node to run the `run.sh` executable. In this case, 
-`run.sh` is a script that contains a list of commands that executes your workload 
-along with any directives that move data as shown below:
+`run.sh` is a shell script that contains a list of commands that executes your workload on the worker load.  For example: 
 
     #/bin/bash
-    module load <module1> <module2> 
     ./code_executable <input_file> <output_file>
     <additional commands>
 
-By default, the submission script above will use the HTCondor file transfer 
-method to transfer the `Executable` to the remote host and the `Error`, `Output` and `Log` 
-files back to user's directory on the submit host. 
+By default, this submission script will use the HTCondor file transfer 
+method to transfer the `Executable` to the remote host and the job files `Error` (stderr) , `Output` (stdout) and `Log` 
+back to user's directory on the submit host. Users have a number of options to transfer to the worker node
+their code executables and input/output files described in the next section.
+
+Users can submit the job script to the OSG via the condor command: `condor_submit myjob.submit`.
 
 
 ## Data Management and Grid Transfers
