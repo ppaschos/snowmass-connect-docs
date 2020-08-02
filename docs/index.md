@@ -95,15 +95,15 @@ https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-
 ensure that these modules are loaded also on the remote worker node. To do so:
 * Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will 
 request a worker node on a site where the OSG modules are available.
-* Load the modules in the executable script, `run.sh` before you invoke your executable as: `module load module1 module2 ...`
+* Load the modules in the executable script, `run.sh` before you invoke your executable code as: `module load module1 module2 ...`
 
 
 ## Data Management and Grid Transfers
 
 As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using four different methods depending on the file size.
 
-1. HTCondor File Transfer for files less than 100 MB.
-
+1. HTCondor File Transfer for files less than 100 MB. To enable HTCondor File transfers for your input and output data enter the following parameters
+in your condor submit file
     transfer_input_files = <comma separated files or directories>
     transfer_output_files = <comma separated files or directories>
   
