@@ -96,19 +96,22 @@ ensure that these modules are loaded also on the remote worker node. To do so:
 * Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will 
 request a worker node on a site where the OSG modules are available.
 * Load the modules in the executable script, `run.sh` before you invoke your executable code as: `module load module1 module2 ...`
-
+2. You must always declare your project name, `+ProjectName="snowmass21"`, in your condor submit file to:
+* Ensure your job is validated for condor to run it on the OSG grid
+* Job statistics is properly collected and displayed at the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
 
 ## Data Management and Grid Transfers
 
 As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using four different methods depending on the file size.
 
-1. HTCondor File Transfer for files less than 100 MB. To enable HTCondor File transfers for your input and output data enter the following parameters
-in your condor submit file
+1. HTCondor File Transfer for files less than 100 MB. To enable HTCondor File transfers for your input and output data nsert the following parameters
+anywhere in your condor submit file:
+
     transfer_input_files = <comma separated files or directories>
     transfer_output_files = <comma separated files or directories>
   
 2. Unix tools for datasets less than 1 GB such as rsync can be invoked from your execution script 
-on the remote host to transfer files from `/collab` by connecting to the submit host.
+running on a remote host to transfer files from `/collab` by connecting to the submit host.
 3. OSG's StashCache for files greater than 1 GB. Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
 You can insert the following command in your execution script to  move data from `/collab/user/<user_id>` to the local
 directory on remote worker node where your job is running: 
