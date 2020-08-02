@@ -55,7 +55,7 @@ data to the OSG storage can be found here: [Globus Connect instructions](globus.
  
 ## Job submissions to the OSG
 
-A typical HTCondor submission script, `myjob.submit`, to the OSG is inlined below. 
+A minimal HTCondor submission script, `myjob.submit`, to the OSG is inlined below. 
 
     Universe = Vanilla
     Executable     = run.sh
@@ -67,21 +67,25 @@ A typical HTCondor submission script, `myjob.submit`, to the OSG is inlined belo
     +ProjectName="snowmass21"
     Queue 1
 
-Refer to the HTCondor manual for more information on the declared parameters and on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
+Refer to the HTCondor manual for more information on the declared parameters and on customizing your submission scripts: https://htcondor.readthedocs.io/en/stable/users-manual/index.html
 
-In the submit script above the user requests a remote worker node to run the `run.sh` executable. In this case, 
+In the submit script above, the user requests a remote worker node to run the `run.sh` executable. In this case, 
 `run.sh` is a shell script that contains a list of commands that executes your workload on the worker load.  For example: 
 
     #/bin/bash
     ./code_executable <input_file> <output_file>
     <additional commands>
 
-By default, this submission script will use the HTCondor file transfer 
+The parameter `should_transfer_files = YES` instructs Condor to use the HTCondor file transfer 
 method to transfer the `Executable` to the remote host and the job files `Error` (stderr) , `Output` (stdout) and `Log` 
-back to user's directory on the submit host. Users have a number of options to transfer to the worker node
-their code executables and input/output files described in the next section.
+back to user's directory on the submit host. Users have a number of options to transfer
+their code executables and input/output files to the remote worker node and is described in the next section.
 
 Users can submit the job script to the OSG via the condor command: `condor_submit myjob.submit`.
+
+For an introduction on managing your jobs with condor we refer to this presentation by the OSG
+https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf
+https://opensciencegrid.org/user-school-2019/#materials/
 
 
 ## Data Management and Grid Transfers
