@@ -112,26 +112,14 @@ anywhere in your condor submit file:
     transfer_input_files = <comma separated files or directories>
     transfer_output_files = <comma separated files or directories>
     
+Unix tools for datasets less than 1 GB such as rsync can be invoked from your execution script 
+running on a remote host to transfer files from `/collab` by connecting to the submit host.
+
 OSG's StashCache for files greater than 1 GB. Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
 You can insert the following command in your execution script to  move data from `/collab/user/<user_id>` to the local
 directory on remote worker node where your job is running: 
 
     module load stashcache
-    stashcp /osgconnect/collab/user/<user_id>/<input_file> .
-
-1. HTCondor File Transfer for files less than 100 MB. To enable HTCondor File transfers for your input and output data insert the following parameters
-anywhere in your condor submit file:
-
-     transfer_input_files = <comma separated files or directories>
-  
-2. Unix tools for datasets less than 1 GB such as rsync can be invoked from your execution script 
-running on a remote host to transfer files from `/collab` by connecting to the submit host.
-3. OSG's StashCache for files greater than 1 GB. Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
-You can insert the following command in your execution script to  move data from `/collab/user/<user_id>` to the local
-directory on remote worker node where your job is running: 
-
-    module load stashcache
-    
     stashcp /osgconnect/collab/user/<user_id>/<input_file> .
 
 To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
