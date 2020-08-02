@@ -81,11 +81,12 @@ method to transfer the `Executable` to the remote host and the job files `Error`
 back to user's directory on the submit host. Users have a number of options to transfer
 their code executables and input/output files to the remote worker node and is described in the next section.
 
-Users can submit the job script to the OSG via the condor command: `condor_submit myjob.submit`.
+Users can submit the job script to the OSG via the condor command on the Snowmass login node: 
+`condor_submit myjob.submit`, which will return a unique <JobID>. 
+You use the <JobID> to query the status of your job with `condor_q <JobID>`
 
 For an introduction on managing your jobs with condor we refer to this presentation by the OSG
 https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf
-https://opensciencegrid.org/user-school-2019/#materials/
 
 
 ## Data Management and Grid Transfers
