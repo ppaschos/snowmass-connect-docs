@@ -26,8 +26,8 @@ run their production computational workflows via job submissions to the OSG HTCo
 output from their jobs
 3. Provide an environment for the development of OSG appropriate workflows that will leverage distributed High ThroughPut 
 computing. To facilitate such development a list of scientific software is accessible from the login node using `modules`. You can list availablle 
-modules using the `module avail` command. You can load a module with the `module load <module_name>` command. More details on 
-the module enviroment are discussed in the [Data Management](#Data-Management-and-Grid-Transfers) section.
+modules using the `module avail` command. You can load a module with the `module load <module_name>` command. Users can request remote worker
+nodes where the module environment is available, discussed in the [Job submission](#Job-submissions-to-the-OSG) section.
 
 ## Storage access
 
