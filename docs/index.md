@@ -33,7 +33,7 @@ the module enviroment are discussed in the [Data Management](#Data-Management) s
 
 Users will have access to the following storage locations when connected to the Snowmass login node:
 
-1. Home directory. As mentioned, your home directory will have 50GB of storage  available and can
+1. Home directory. As mentioned above, your home directory will have 50GB of storage  available and can
 be used for scripts, submission files and small size data. Home is network mounted on the login node and large input 
 files for jobs on the grid should not be stored here.
 2. Local storage in`/local-scratch`. *This is not available for user data at the moment. It will be*
