@@ -126,7 +126,7 @@ directory on remote worker node where your job is running:
 
       stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
     
-4. If the filesize of each dataset exceeds 2 GB an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
+* If the filesize of each dataset exceeds 2 GB an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
 for a consultation to discuss if your workflow can benefit from access to a GridFTP door. 
 
 ## Support and Consultation
