@@ -80,7 +80,7 @@ that executes your workload on the worker load.  For example:
 The parameter `should_transfer_files = YES` instructs Condor to use the HTCondor file transfer 
 method to transfer the `Executable` to the remote host and the job files `Error` (stderr) , `Output` (stdout) and `Log` 
 back to user's directory on the submit host. Users have a number of options to transfer
-their code executables and input/output files to the remote worker node and is described in the next section.
+their code executables and input/output files to the remote worker node, described in the next section.
 
 Users can submit the job script to the OSG via the condor command on the Snowmass login node: 
 `condor_submit myjob.submit`, which will return a unique `<JobID>` number. 
