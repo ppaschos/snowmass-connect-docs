@@ -114,7 +114,8 @@ anywhere in your condor submit file:
       transfer_input_files = <comma separated files or directories>
       transfer_output_files = <comma separated files or directories>
 
-* OSG's StashCache for files greater than 1 GB. Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
+* OSG's StashCache. Recommended for files greater than 1 GB each but less than 50 GB total from all files. 
+Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
 You can insert the following command in your execution script to  move data from `/collab/user/<user_id>` to the local
 directory on remote worker node where your job is running: 
 
