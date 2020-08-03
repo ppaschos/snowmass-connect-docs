@@ -1,96 +1,138 @@
-# Overview
+# Snowmass Connect
 
-
+The purpose of this documentation is to facilate the onboarding of researchers with the Snowmass21 collaboration in accessing
+the Open Science Grid (OSG) via the Snowmass Connect service hosted at the University of Chicago.
+  
 ## Getting Started
 
-Snowmass Connect is a job submission service providing access to the Open Science Grid. To sign up, visit [https://connect.snowmass21.io/](https://connect.snowmass21.io).
+Snowmass Connect is a job submission service providing access to the Open Science Grid. To sign up, visit [https://connect.snowmass21.io](https://connect.snowmass21.io). It is important that you upload your ssh-keys following the instructions on the portal. The process will create your
+home directory on the Snowmass submit node and grant you access via passwordless ssh.
 
 ## Login to the submit node
 
-After you have uploaded your ssh-keys in the Snowmass Connect portal you can connect to the login node as:
+Once you upload your ssh-keys in the Snowmass Connect portal you can connect to the login node via passwordless ssh as:
 
-`ssh login.snowmass21.io` 
+`ssh <user_id>@login.snowmass21.io` 
 
-The login node is also a submission node for jobs to the Open Science Grid. Upon login you will in your home directory that has 50GB of quota. 
-Use your home directory to store submission files and scripts.
+You can find your `<user_id>` from your profile on the Snowmass Connect portal. 
+The login node is also a submission node for jobs to the Open Science Grid. Upon login you will land in your home directory `/home/user_id`. Your home 
+directory has 50GB of quota. Use your home directory to store job submission files, scripts and code. Do **not** store large files (larger than 300 MB) in your home directory for the purpose of submissions to the OSG. 
 
-## Transferring Data to and from the OSG Connect Storage
+The Snowmass login node provides a service to the users of the collaboration in the following ways:
 
-Scientific data used as input for jobs to the OSG grid should be transferred to the OSG Connect storage allocated for the Snowmass21 project 
-using Globus Online. Instructions on how to set up Globus Connect Personal can be found [here](https://www.globus.org/globus-connect-personal). 
-Access to the OSG Connect storage endpoint is enabled by authenticating against the Globus collection "OSG Connect CI Logon" using the GLobus Connect client. 
-You can search for the collection by name in the search bar of the File Manager.
+1. Provide users a gateway to the Open Science Grid in order to 
+run their production computational workflows via job submissions to the OSG HTCondor pool
+2. Provide access to the OSG Storage at the University of Chicago where users can stage input files for grid jobs and collect
+output from their jobs
+3. Provide an environment for the development of OSG appropriate workflows that will leverage distributed High ThroughPut 
+computing. To facilitate such development a list of scientific software is accessible from the login node using `modules`. You can list availablle 
+modules using the `module avail` command. You can load a module with the `module load <module_name>` command. Users can request remote worker
+nodes where the module environment is available, discussed in the [Job submission](#Job-submissions-to-the-OSG) section.
 
-To access storage via Globus online users must have an institutional based grid certificate issued by CILogon. To obtain one follow the steps below:
+## Storage access
 
-1. Logon with your institutional credentials at http://cilogon.org
-2. Select "Create a Password Protected Certificate". Enter a password and download your encrypted certificate, named usercred.p12. The certificate can be obtained 
-by using the openssl pcks12 command as: `openssl pkcs12 -in [your-cert-file] -clcerts -nokeys -out usercert.pem` 
-3. Email to paschos@uchicago.edu the output of the following command which will print out your DN (Distinguish Name): `openssl x509 -in usercert.pem -noout -subject` 
+Users will have access to the following storage locations when connected to the Snowmass login node:
 
-Once your DN has been entered in the user access list you will be able to access the OSG Connect CI Logon collection with the Globus Connect client by 
-validating with your institution credentials. Navigate to the OSG Snowmass21 Collaborations Connect storage by typing in the Path box `/stash/collab`. You can then navigate to your user directory as shown in the example below:
+1. Home directory. As mentioned above, your home directory will have 50GB of storage  available and can
+be used for scripts, submission files and small size data. Home is network mounted on the login node and large input 
+files for jobs on the grid should not be stored here.
+2. Local storage in`/local-scratch`. *This is not available for user data at the moment. Additional storage will be*
+*provisioned which would enable users to create work directories and submit jobs from there.*
+*When it becomes available we will notify the users and update the documentation here.*
+3. OSG storage (Ceph) accebible from the login node at `/collab`. Users should store their 
+data in either of two subdirectories:  
+* For private user data: `/collab/user/<user_id>`  
+* For shared data among the members of the Snowmass21 collaboration:`/collab/snowmass21`
 
-![](snowmass_3.png)
+Users can transfer data from external institutions to Snowmass Connect storage using any of the three following methods:
+1. **scp**. For example: `scp -r <file_or_directory> <user_id>@login.snowmass.io:/collab/user/<user_id>/.` will copy a file or a directory
+from your local machine to your user directory on the OSG storage. The ssh-keys used for your profile on the Snowmass Connect portal 
+must stored on the local machine.
+2. **rsync**. For example: `rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --progress test.transfer ppaschos@login.snowmass21.io:dump/` will copy the `test.transfer` file in the `dump/` directory in your user space. If the directory 
+does not exist, it will be created. As in `scp` the ssh-keys used for your profile on the Snowmass Connect portal 
+must stored on the source machine.
+3. **Globus Connect** to transfer files to OSG storage only. A guide on how to gain access to the Globus door and instructions for transfering 
+data to the OSG storage can be found here: [Globus Connect instructions](globus.md)
 
-Shown in the image above are two possible destinations for the data.
+ 
+## Job submissions to the OSG
 
-1. Navigate to `/stash/collab/project/snowmass21` if data are to be shared by multiple users.
-2. Navigate to `/stash/collab/user/<user_id>` if data are for the exclusive use of a single user.
-In both cases, users can create subdirectories and organize content by either using the Globus client interface or from the login.snowmass21.io node. 
+A minimal HTCondor submission script, `myjob.submit`, to the OSG is inlined below. 
 
-On the right panel of the Globus Connect client tool you can search and connect to another collection. The latter can be your own laptop/server or a collaboration end point that has provided a Globus Connect door for the researchers to use. 
+    Universe = Vanilla
+    Executable     = run.sh
+    Error   = output.err.$(Cluster)-$(Process)
+    Output  = output.out.$(Cluster)-$(Process)
+    Log     = output.log.$(Cluster)
+    should_transfer_files = YES
+    WhenToTransferOutput = ON_EXIT
+    request_cpus = 1
+    request_memory = 1 GB
+    +ProjectName="snowmass21"
+    Queue 1
 
-To transfer files you can select the list files from your local computer and then select Start. To transfer files out simply reverse the direction of the process. 
+Refer to the HTCondor manual for more information on the declared parameters and on customizing your submission scripts: https://htcondor.readthedocs.io/en/stable/users-manual/index.html
 
- **Important** Users can not access their home directories in the snowmass21 login node over the Globus door. However, users do have access to the /stash/collab directory when they login to login.snowmass21.io. Files can be moved or copied over to their home directory but it is strongly discouraged for files larger than a few MB.
+When the script above is submitted, the user would request a remote worker node with 1 core and 1 GB  
+to run the `run.sh` executable. In this case, `run.sh` is a shell script that contains a list of commands 
+that executes your workload on the worker node.  For example: 
 
-## Data for computational workflows to the OSG grid 
+    #/bin/bash
+    ./code_executable <input_file> <output_file>
+    <additional commands>
 
-As disussed above, users should place their science input data for processing on the Open Science Grid in /stash/collab/user/<user_id> or /stash/collab/project/snowmass21. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using the stashcp tool. You can insert the following command in your execution script to move data from your collab space to the remote worker node where your 
-job is running: 
+The parameter `should_transfer_files = YES` instructs Condor to use the HTCondor file transfer 
+method to transfer the `Executable` to the remote host and the job files `Error` (stderr) , `Output` (stdout) and `Log` 
+back to user's directory on the submit host. Users have a number of options to transfer
+their code executables and input/output files to the remote worker node, described in the next section.
 
-`module load stashcache`
+Users can submit the job script to the OSG via the condor command on the Snowmass login node: 
+`condor_submit myjob.submit`, which will return a unique `<JobID>` number. 
+You can use the `<JobID>` to query the status of your job with `condor_q <JobID>`
 
-`stashcp /osgconnect/collab/user/<user_id>/<input_file> .`
+For an introduction on managing your jobs with condor we refer to this presentation by the OSG
+https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf
 
-To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
+### Notable points
 
-`stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>`
+1. If your application/code was built or depends on modules used on the snowmass21 login node you must 
+ensure that these modules are loaded also on the remote worker node. To do so:
+* Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will 
+request a worker node on a site where the OSG modules are available.
+* Load the modules in the executable script, `run.sh` before you invoke your executable code as: `module load module1 module2`
+2. You must always declare your project name, `+ProjectName="snowmass21"`, in your condor submit file to:
+* Ensure your job is validated for condor to run it on the OSG grid
+* Job statistics are properly collected and displayed at the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
 
+## Data Management and Grid Transfers
 
+As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using four different methods depending on the file size.
 
-## Job submissions
+* HTCondor File Transfer for files less than 100 MB. To enable HTCondor File transfers for your input and output data insert the following parameters
+anywhere in your condor submit file:
 
-A typical submission script is inlined below. 
+      transfer_input_files = <comma separated files or directories>
+      transfer_output_files = <comma separated files or directories>
+    
+* Unix tools for datasets less than 1 GB such as rsync can be invoked from your execution script 
+running on a remote host to transfer files from `/collab` by connecting to the submit host.
 
-`Universe = Vanilla`
+* OSG's StashCache for files greater than 1 GB. Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
+You can insert the following command in your execution script to  move data from `/collab/user/<user_id>` to the local
+directory on remote worker node where your job is running: 
 
-`Executable     = run.sh`
+      module load stashcache
+      stashcp /osgconnect/collab/user/<user_id>/<input_file> .
 
-`Requirements = && (HAS_MODULES =?= TRUE)`
+  To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
 
-`Error   = output.err.$(Cluster)-$(Process)`
+      stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
+    
+* If the filesize of each dataset exceeds 2 GB an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
+for a consultation to discuss if your workflow can benefit from access to a GridFTP door. 
 
-`Output  = output.out.$(Cluster)-$(Process)`
+## Support and Consultation
 
-`Log     = output.log.$(Cluster)`
-
-`WhenToTransferOutput = ON_EXIT`
-
-`+ProjectName="snowmass21"`
-
-`Queue 1`
-
-The file run.sh is a shell executablle script that contains your execution commands along with any directives to move the data as noted above. 
-For small files to and from the grid you can use the HTCondor file transfer method by including the following two lines in the submission 
-script above:
-
-`transfer_input_files = <comma separated files>`
-
-`should_transfer_files = YES`
-
-Refer to the HTCondor manual for more information on customizing your submission scripts: https://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html
-
-
-
+Snowmass21 Connect is supported by the University of Chicago and Open Science Grid staff. To report issues with the service please submit a ticket to
+support@opensciencegrid.org and request support from collaboration services. Consultation on submitting and running jobs at the OpenScience Grid
+can be request by emailing: paschos@uchicago.edu
