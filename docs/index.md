@@ -117,24 +117,25 @@ anywhere in your condor submit file:
       transfer_input_files = <comma separated files or directories>
       transfer_output_files = <comma separated files or directories>
 
-This method is recommended for the majority of computational workflows running on the OSG. OSG recommends that users should employ this method when:
+This method is recommended for the majority of computational workflows running on the OSG. Users can employ this method if
+the inputdata per job does not exceed 1 GB. In addition, OSG recommends that the output data per job that need to be 
+transfered back does not exceed 1 GB as well. 
 
-1. Input data does not exceed 100 MB each or total size from all input files is less than 500 MB per job
-2. Output data does not cumulatively exceed 1 GB.
-
-* OSG's StashCache. Recommended for files greater than 1 GB each but less than 10 GB total from all files. 
-Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
-You can insert the following command in your execution script to  move data from `/collab/user/<user_id>` to the local
-directory on remote worker node where your job is running: 
+* OSG's StashCache. Users can use the stashcp tool to transfer data from their `/collab` space only to the remote host. 
+You can insert the following command in your execution script to transfer data from `/collab/user/<user_id>` to the local
+directory on the remote worker node where your job is running: 
 
       module load stashcache
       stashcp /osgconnect/collab/user/<user_id>/<input_file> .
 
-  To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
+ To transfer data back to your collab space from the remote node run the following command in your execution script:
 
       stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
+
+This method is recommended for input files larger than 1 GB each or 10 GB total from all input data. The recommended upper limit for
+the output files to be transfered back from the remote node is 10 GB per job.
     
-* If the filesize of each input dataset exceeds 10 GB an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
+* If the filesize of each input dataset exceeds 10 GB then an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
 for a consultation to discuss if your workflow can benefit from access to a GridFTP door. 
 
 ## Support and Consultation
