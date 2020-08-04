@@ -29,7 +29,6 @@ computing. To facilitate such development a list of scientific software is acces
 modules using the `module avail` command. You can load a module with the `module load <module_name>` command. Users can request remote worker
 nodes where the module environment is available, discussed in the [Job submission](#Job-submissions-to-the-OSG) section.
 
-<iframe src="https://grafana.mwt2.org/d-solo/JiH0SAoZk/connect-servers?orgId=1&var-Server=login_snowmass21_ci-connect_net&from=1596498072423&to=1596519672423&panelId=9" width="450" height="200" frameborder="0"></iframe>
 
 ## Storage access
 
