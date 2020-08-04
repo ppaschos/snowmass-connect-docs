@@ -5,7 +5,7 @@ the Open Science Grid (OSG) via the Snowmass Connect service hosted at the Unive
   
 ## Getting Started
 
-Snowmass Connect is a job submission service providing access to the Open Science Grid. To sign up, visit [https://connect.snowmass21.io](https://connect.snowmass21.io). It is important that you upload your ssh-keys following the instructions on the portal. The process will create your
+Snowmass Connect is a job submission service providing access to the distributed cyberinfrastructure of the Open Science Grid. To sign up, visit [https://connect.snowmass21.io](https://connect.snowmass21.io). It is important that you upload your ssh-keys following the instructions on the portal. The process will create your
 home directory on the Snowmass submit node and grant you access via passwordless ssh.
 
 ## Login to the submit node
