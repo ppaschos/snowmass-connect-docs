@@ -36,9 +36,8 @@ This section describes the storage locations accessible by the users on the on w
 users can move data in from their home institutions.
 
 1. Home directory. As mentioned above, your home directory will have 50GB of storage  available and can
-be used for scripts, submission files and small size data. Home is network mounted on the login node and large input 
-files for jobs on the grid should not be stored here.
-2. OSG storage (Ceph) accebible from the login node at `/collab`. Users should store their 
+be used for scripts, submission files and small size data. Large input files for jobs on the grid should not be stored here.
+2. OSG storage accebible from the login node at `/collab`. Users should store their 
 data in either of two subdirectories:  
 * For private user data: `/collab/user/<user_id>`  
 * For shared data among the members of the Snowmass21 collaboration:`/collab/snowmass21`
