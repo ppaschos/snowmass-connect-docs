@@ -38,13 +38,13 @@ users can move data in from their home institutions.
 1. Home directory. As mentioned above, your home directory will have 50GB of storage  available and can
 be used for scripts, submission files and small size data. Home is network mounted on the login node and large input 
 files for jobs on the grid should not be stored here.
-2. Local storage in`/scratch`. *This is not available for user data at the moment. Additional storage will be*
-*provisioned to allow users to create work directories and launch jobs from there.*
-*Users will be notified when this storage becomes available. Documentation here will be updated accordingly with more details.*
-3. OSG storage (Ceph) accebible from the login node at `/collab`. Users should store their 
+2. OSG storage (Ceph) accebible from the login node at `/collab`. Users should store their 
 data in either of two subdirectories:  
 * For private user data: `/collab/user/<user_id>`  
 * For shared data among the members of the Snowmass21 collaboration:`/collab/snowmass21`
+3. Local storage in`/scratch`. *This is not available for user data at the moment. Additional storage will be*
+*provisioned to allow users to create work directories and launch jobs from there.*
+*Users will be notified when this storage becomes available. Documentation here will be updated accordingly with more details.
 
 Users can transfer data from external institutions to Snowmass Connect storage using any of the three following methods:
 1. **scp**. For example: `scp -r <file_or_directory> <user_id>@login.snowmass.io:/collab/user/<user_id>/.` will copy a file or a directory
