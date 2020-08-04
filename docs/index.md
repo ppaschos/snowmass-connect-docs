@@ -29,20 +29,21 @@ computing. To facilitate such development a list of scientific software is acces
 modules using the `module avail` command. You can load a module with the `module load <module_name>` command. Users can request remote worker
 nodes where the module environment is available, discussed in the [Job submission](#Job-submissions-to-the-OSG) section.
 
+
 ## Storage access
 
-Users will have access to the following storage locations when connected to the Snowmass login node:
+This section describes the storage locations accessible by the users on the on when connected to Snowmass login node. It also describes the means by which
+users can move data in from their home institutions.
 
 1. Home directory. As mentioned above, your home directory will have 50GB of storage  available and can
-be used for scripts, submission files and small size data. Home is network mounted on the login node and large input 
-files for jobs on the grid should not be stored here.
-2. Local storage in`/local-scratch`. *This is not available for user data at the moment. Additional storage will be*
-*provisioned which would enable users to create work directories and submit jobs from there.*
-*When it becomes available we will notify the users and update the documentation here.*
-3. OSG storage (Ceph) accebible from the login node at `/collab`. Users should store their 
+be used for scripts, submission files and small size data. Large input files for jobs on the grid should not be stored here.
+2. OSG storage accebible from the login node at `/collab`. Users should store their 
 data in either of two subdirectories:  
 * For private user data: `/collab/user/<user_id>`  
 * For shared data among the members of the Snowmass21 collaboration:`/collab/snowmass21`
+3. Local storage in`/scratch`. *This is not available for user data at the moment. Additional storage will be*
+*provisioned to allow users to create work directories and launch jobs from there.*
+*Users will be notified when this storage becomes available. Documentation here will be updated accordingly with more details.
 
 Users can transfer data from external institutions to Snowmass Connect storage using any of the three following methods:
 1. **scp**. For example: `scp -r <file_or_directory> <user_id>@login.snowmass.io:/collab/user/<user_id>/.` will copy a file or a directory
@@ -57,7 +58,8 @@ data to the OSG storage can be found here: [Globus Connect instructions](globus.
  
 ## Job submissions to the OSG
 
-A minimal HTCondor submission script, `myjob.submit`, to the OSG is inlined below. 
+This section provides a short introduction to submitting jobs to the OSG from the Snowmass Connect login node. 
+A minimal HTCondor submission script, `myjob.submit`, to the OSG is inlined below:
 
     Universe = Vanilla
     Executable     = run.sh
@@ -93,10 +95,10 @@ You can use the `<JobID>` to query the status of your job with `condor_q <JobID>
 For an introduction on managing your jobs with condor we refer to this presentation by the OSG
 https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf
 
-### Notable points
+### Notable guidelines
 
 1. If your application/code was built or depends on modules used on the snowmass21 login node you must 
-ensure that these modules are loaded also on the remote worker node. To do so:
+ensure that these modules are also loaded on the remote worker node. To do so:
 * Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will 
 request a worker node on a site where the OSG modules are available.
 * Load the modules in the executable script, `run.sh` before you invoke your executable code as: `module load module1 module2`
@@ -106,29 +108,34 @@ request a worker node on a site where the OSG modules are available.
 
 ## Data Management and Grid Transfers
 
+This section describes recommendations and options for transferring data to the from remote woker nodes as part of a job submission to the OSG.
 As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using four different methods depending on the file size.
 
-* HTCondor File Transfer for files less than 100 MB. To enable HTCondor File transfers for your input and output data insert the following parameters
+* HTCondor File Transfer. To enable HTCondor File transfers for your input and output data insert the following parameters
 anywhere in your condor submit file:
 
       transfer_input_files = <comma separated files or directories>
       transfer_output_files = <comma separated files or directories>
-    
-* Unix tools for datasets less than 1 GB such as rsync can be invoked from your execution script 
-running on a remote host to transfer files from `/collab` by connecting to the submit host.
 
-* OSG's StashCache for files greater than 1 GB. Users can use the stashcp tool to transfer data in their `/collab` space to the remote host. 
-You can insert the following command in your execution script to  move data from `/collab/user/<user_id>` to the local
-directory on remote worker node where your job is running: 
+This method is recommended for the majority of computational workflows running on the OSG. Users can employ this method if
+the inputdata per job does not exceed 1 GB. In addition, OSG recommends that the output data per job that need to be 
+transfered back does not exceed 1 GB as well. 
+
+* OSG's StashCache. Users can use the stashcp tool to transfer data from their `/collab` space only to the remote host. 
+You can insert the following command in your execution script to transfer data from `/collab/user/<user_id>` to the local
+directory on the remote worker node where your job is running: 
 
       module load stashcache
       stashcp /osgconnect/collab/user/<user_id>/<input_file> .
 
-  To transfer data back to your collab space from the remote node that is running your job you can execute the following command:
+ To transfer data back to your collab space from the remote node run the following command in your execution script:
 
       stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
+
+This method is recommended for input files larger than 1 GB each or 10 GB total from all input data. The recommended upper limit for
+the output files to be transfered back from the remote node is 10 GB per job.
     
-* If the filesize of each dataset exceeds 2 GB an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
+* If the filesize of each input dataset exceeds 10 GB then an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
 for a consultation to discuss if your workflow can benefit from access to a GridFTP door. 
 
 ## Support and Consultation
