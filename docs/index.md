@@ -78,13 +78,13 @@ A minimal HTCondor submission script, `myjob.submit`, to the OSG is inlined belo
 
 Refer to the [HTCondor manual](https://htcondor.readthedocs.io/en/stable/users-manual/index.html) for more information on the declared parameters and on customizing your submission scripts.
 
-When the condor script above is submitted, the user would request a remote worker node with 1 core and 1 GB to run the `run.sh` executable. In this case, `run.sh` is a shell script that contains a list of commands that executes your workload on the worker node.  For example: 
+When the HTCondor script above is submitted, the user would request a remote worker node with 1 core and 1 GB to run the `run.sh` executable. In this case, `run.sh` is a shell script that contains a list of commands that executes your workload on the worker node.  For example: 
 
     #/bin/bash
     ./code_executable <input_file> <output_file>
     <additional commands>
 
-The parameter `should_transfer_files = YES` instructs Condor to use the HTCondor file transfer 
+The parameter `should_transfer_files = YES` instructs HTCondor to use the HTCondor file transfer 
 method to transfer the `Executable` to the remote host and the job files `Error` (stderr) , `Output` (stdout) and `Log` 
 back to user's directory on the submit host. Users have a number of options to transfer
 their code executables and input/output files to the remote worker node, described in the next section.
@@ -93,7 +93,7 @@ Users can submit the job script to the OSG via the condor command on the Snowmas
 `condor_submit myjob.submit`, which will return a unique `<JobID>` number. 
 You can use the `<JobID>` to query the status of your job with `condor_q <JobID>`
 
-For an introduction on managing your jobs with condor we refer to [this](https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf) presentation by the OSG:
+For an introduction on managing your jobs with HTCondor we refer to [this](https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf) presentation by the OSG:
 
 ###  Guidelines
 
@@ -105,7 +105,7 @@ For an introduction on managing your jobs with condor we refer to [this](https:/
     * Ensure your job is validated for condor to run it on the OSG grid
     * Job statistics are properly collected and displayed on the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
 
-## Data Management and Grid Transfers
+## Data Management and Grid TransfersC
 
 This section describes recommendations and options for transferring data to the from remote woker nodes as part of a job submission to the OSG.
 As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using three different methods depending on the file size.
