@@ -124,11 +124,11 @@ directory on the remote worker node where your job is running:
 
         module load stashcache
         stashcp /osgconnect/collab/user/<user_id>/<input_file> .
-
-  To transfer data back to your collab space from the remote node run the following command in your execution script:
+        
+   To transfer data back to your collab space from the remote node run the following command in your execution script:
 
       stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
-
+      
    This method is recommended for input files larger than 1 GB each or 10 GB total from all input data. The recommended upper limit for the output files to be transfered back from the remote node is 10 GB per job.
 
 3. If the filesize of each input dataset exceeds 10 GB then an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
