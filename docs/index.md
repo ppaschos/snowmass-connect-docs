@@ -98,16 +98,12 @@ For an introduction on managing your jobs with condor we refer to [this](https:/
 ###  Guidelines
 
 1. If your application/code was built or depends on modules used on the snowmass21 login node and it dynamically links against libraries of the module environment you would need to ensure that these modules are also availablle and loaded on the remote worker node. To do so:
-
-   a) Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will request a worker node on a site where the OSG modules are available
-  
-   b) Before you invoke your executable inside the `run.sh` script load the modules as: `module load module1 module2`
+    * Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will request a worker node on a site where the OSG modules are available
+    * Before you invoke your executable inside the `run.sh` script load the modules as: `module load module1 module2`
   
 2. You must always declare your project name, `+ProjectName="snowmass21"`, in your condor submission script to:
-
-    a) Ensure your job is validated for condor to run it on the OSG grid
-    
-    b) Job statistics are properly collected and displayed at the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
+    * Ensure your job is validated for condor to run it on the OSG grid
+    * Job statistics are properly collected and displayed at the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
 
 ## Data Management and Grid Transfers
 
