@@ -76,11 +76,9 @@ A minimal HTCondor submission script, `myjob.submit`, to the OSG is inlined belo
     +ProjectName="snowmass21"
     Queue 1
 
-Refer to the HTCondor manual for more information on the declared parameters and on customizing your submission scripts: https://htcondor.readthedocs.io/en/stable/users-manual/index.html
+Refer to the [HTCondor manual](https://htcondor.readthedocs.io/en/stable/users-manual/index.html) for more information on the declared parameters and on customizing your submission scripts.
 
-When the script above is submitted, the user would request a remote worker node with 1 core and 1 GB  
-to run the `run.sh` executable. In this case, `run.sh` is a shell script that contains a list of commands 
-that executes your workload on the worker node.  For example: 
+When the condor script above is submitted, the user would request a remote worker node with 1 core and 1 GB to run the `run.sh` executable. In this case, `run.sh` is a shell script that contains a list of commands that executes your workload on the worker node.  For example: 
 
     #/bin/bash
     ./code_executable <input_file> <output_file>
@@ -95,8 +93,7 @@ Users can submit the job script to the OSG via the condor command on the Snowmas
 `condor_submit myjob.submit`, which will return a unique `<JobID>` number. 
 You can use the `<JobID>` to query the status of your job with `condor_q <JobID>`
 
-For an introduction on managing your jobs with condor we refer to this presentation by the OSG
-https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf
+For an introduction on managing your jobs with condor we refer to [this](https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf) presentation by the OSG:
 
 ###  Guidelines
 
@@ -147,5 +144,5 @@ for a consultation to discuss if your workflow can benefit from access to a Grid
 ## Support and Consultation
 
 Snowmass21 Connect is supported by the University of Chicago and Open Science Grid staff. To report issues with the service please submit a ticket to
-support@opensciencegrid.org and request support from collaboration services. Consultation on submitting and running jobs at the OpenScience Grid
-can be request by emailing: paschos@uchicago.edu
+[OSG support](support@opensciencegrid.org) and request support from collaboration services. Consultation on submitting and running jobs at the OpenScience Grid
+can be requested by emailing: [paschos@uchicago.edu](paschos@uchicago.edu)
