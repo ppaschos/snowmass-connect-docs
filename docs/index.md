@@ -89,7 +89,7 @@ method to transfer the `Executable` to the remote host and the job files `Error`
 back to user's directory on the submit host. Users have a number of options to transfer
 their code executables and input/output files to the remote worker node, described in the next section.
 
-Users can submit the job script to the OSG via the condor command on the Snowmass login node: 
+Users can submit the job script to the OSG via the HTCondor command on the Snowmass login node: 
 `condor_submit myjob.submit`, which will return a unique `<JobID>` number. 
 You can use the `<JobID>` to query the status of your job with `condor_q <JobID>`
 
@@ -101,8 +101,8 @@ For an introduction on managing your jobs with HTCondor we refer to [this](https
     * Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will request a worker node on a site where the OSG modules are available
     * Before you invoke your executable inside the `run.sh` script load the modules as: `module load module1 module2`
   
-2. You must always declare your project name, `+ProjectName="snowmass21"`, in your condor submission script to:
-    * Ensure your job is validated for condor to run it on the OSG grid
+2. You must always declare your project name, `+ProjectName="snowmass21"`, in your HTCondor submission script to:
+    * Ensure your job is validated for HTCondor to run it on the OSG grid
     * Job statistics are properly collected and displayed on the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
 
 ## Data Management and Grid TransfersC
@@ -110,7 +110,7 @@ For an introduction on managing your jobs with HTCondor we refer to [this](https
 This section describes recommendations and options for transferring data to the from remote woker nodes as part of a job submission to the OSG.
 As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using three different methods depending on the file size.
 
-1. HTCondor File Transfer. This method is recommended for the majority of computational workflows running on the OSG. Users can employ this method if the total size of the input data per job does not exceed 1 GB. In addition, OSG recommends that the output data per job that need to be transfered back does not exceed 1 GB as well. To enable HTCondor File transfers for your input and output data insert the following parameters anywhere in your condor submit file:
+1. HTCondor File Transfer. This method is recommended for the majority of computational workflows running on the OSG. Users can employ this method if the total size of the input data per job does not exceed 1 GB. In addition, OSG recommends that the output data per job that need to be transfered back does not exceed 1 GB as well. To enable HTCondor File transfers for your input and output data insert the following parameters anywhere in your HTCondor submit file:
 
         transfer_input_files = <comma separated files or directories>
         transfer_output_files = <comma separated files or directories>
