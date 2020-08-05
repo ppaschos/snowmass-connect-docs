@@ -39,19 +39,22 @@ users can move data in from their home institutions.
 be used for scripts, submission files and small size data. Large input files for jobs on the grid should not be stored here.
 2. OSG storage accebible from the login node at `/collab`. Users should store their 
 data in either of two subdirectories:  
-* For private user data: `/collab/user/<user_id>`  
-* For shared data among the members of the Snowmass21 collaboration:`/collab/snowmass21`
+    For private user data: `/collab/user/<user_id>`  
+    For shared data among the members of the Snowmass21 collaboration:`/collab/snowmass21`
 3. Local storage in`/scratch`. *This is not available for user data at the moment. Additional storage will be*
 *provisioned to allow users to create work directories and launch jobs from there.*
 *Users will be notified when this storage becomes available. Documentation here will be updated accordingly with more details.
 
 Users can transfer data from external institutions to Snowmass Connect storage using any of the three following methods:
+
 1. **scp**. For example: `scp -r <file_or_directory> <user_id>@login.snowmass.io:/collab/user/<user_id>/.` will copy a file or a directory
 from your local machine to your user directory on the OSG storage. The ssh-keys used for your profile on the Snowmass Connect portal 
 must stored on the local machine.
+
 2. **rsync**. For example: `rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --progress test.transfer ppaschos@login.snowmass21.io:dump/` will copy the `test.transfer` file in the `dump/` directory in your user space. If the directory 
 does not exist, it will be created. As in `scp` the ssh-keys used for your profile on the Snowmass Connect portal 
 must stored on the source machine.
+
 3. **Globus Connect** to transfer files to OSG storage only. A guide on how to gain access to the Globus door and instructions for transfering 
 data to the OSG storage can be found here: [Globus Connect instructions](globus.md)
 
