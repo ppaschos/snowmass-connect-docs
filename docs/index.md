@@ -95,8 +95,7 @@ Users can submit the job script to the OSG via the condor command on the Snowmas
 `condor_submit myjob.submit`, which will return a unique `<JobID>` number. 
 You can use the `<JobID>` to query the status of your job with `condor_q <JobID>`
 
-For an introduction on managing your jobs with condor we refer to this presentation by the OSG
-https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf
+For an introduction on managing your jobs with condor we refer to [this](https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf) presentation by the OSG:
 
 ###  Guidelines
 
