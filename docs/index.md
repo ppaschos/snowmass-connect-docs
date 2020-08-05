@@ -76,7 +76,7 @@ A minimal HTCondor submission script, `myjob.submit`, to the OSG is inlined belo
     +ProjectName="snowmass21"
     Queue 1
 
-Refer to the HTCondor manual for more information on the declared parameters and on customizing your submission scripts: https://htcondor.readthedocs.io/en/stable/users-manual/index.html
+Refer to the [HTCondor manual](https://htcondor.readthedocs.io/en/stable/users-manual/index.html) for more information on the declared parameters and on customizing your submission scripts.
 
 When the script above is submitted, the user would request a remote worker node with 1 core and 1 GB  
 to run the `run.sh` executable. In this case, `run.sh` is a shell script that contains a list of commands 
@@ -146,5 +146,5 @@ for a consultation to discuss if your workflow can benefit from access to a Grid
 ## Support and Consultation
 
 Snowmass21 Connect is supported by the University of Chicago and Open Science Grid staff. To report issues with the service please submit a ticket to
-support@opensciencegrid.org and request support from collaboration services. Consultation on submitting and running jobs at the OpenScience Grid
-can be request by emailing: paschos@uchicago.edu
+[OSG support](support@opensciencegrid.org) and request support from collaboration services. Consultation on submitting and running jobs at the OpenScience Grid
+can be request by emailing: [paschos@uchicago.edu](paschos@uchicago.edu)
