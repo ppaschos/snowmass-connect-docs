@@ -104,7 +104,7 @@ https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-
 
    a) Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will request a worker node on a site where the OSG modules are available
   
-   b) Load the modules in the executable script, `run.sh` before you invoke your executable code as: `module load module1 module2`
+   b) Before you invoke your executable inside the `run.sh` script load the modules as: `module load module1 module2`
   
 2. You must always declare your project name, `+ProjectName="snowmass21"`, in your condor submission script to:
 
