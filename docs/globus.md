@@ -9,7 +9,7 @@ You can search for the collection by name in the search bar of the File Manager.
 In order to access the OSG storage for Snowmass via Globus online, users must have an institutional 
 based grid certificate issued by CILogon. To obtain one follow the steps below:
 
-1. Logon with your institutional credentials at http://cilogon.org
+1. Logon with your institutional credentials at [http://cilogon.org](http://cilogon.org)
 2. Select "Create a Password Protected Certificate". Enter a password and download your encrypted certificate, named usercred.p12. 
 The certificate can be obtained 
 by using the openssl pcks12 command as: `openssl pkcs12 -in [your-cert-file] -clcerts -nokeys -out usercert.pem`
