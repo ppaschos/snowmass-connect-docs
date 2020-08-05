@@ -128,7 +128,7 @@ for a consultation to discuss if your workflow can benefit from access to a Grid
 
 ## Job Examples to the OSG
 
-A list of HTCondor submission examples to the OSG with instructions for users to practice with is included here: [List of Job Examples]examples.md)
+A list of HTCondor submission examples to the OSG with instructions for users to practice with is included here: [List of Job Examples](examples.md)
 
 ## Support and Consultation
 
