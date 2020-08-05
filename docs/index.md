@@ -100,8 +100,7 @@ https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-
 
 ###  Guidelines
 
-1. If your application/code was built or depends on modules used on the snowmass21 login node you must 
-ensure that these modules are also loaded on the remote worker node. To do so:
+1. If your application/code was built or depends on modules used on the snowmass21 login node and it dynamically links against libraries of the module environment you would need to ensure that these modules are also availablle and loaded on the remote worker node. To do so:
 
    a) Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will request a worker node on a site where the OSG modules are available
   
