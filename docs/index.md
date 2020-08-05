@@ -20,8 +20,7 @@ directory has 50GB of quota. Use your home directory to store job submission fil
 
 The Snowmass login node provides a service to the users of the collaboration in the following ways:
 
-1. Provide users a gateway to the Open Science Grid in order to 
-run their production computational workflows via job submissions to the OSG HTCondor pool
+1. Provide users a gateway to the Open Science Grid in order to run their production computational workflows via job submissions to the OSG HTCondor pool
 2. Provide access to the OSG Storage at the University of Chicago where users can stage input files for grid jobs and collect
 output from their jobs
 3. Provide an environment for the development of OSG appropriate workflows that will leverage distributed High ThroughPut 
@@ -95,7 +94,7 @@ You can use the `<JobID>` to query the status of your job with `condor_q <JobID>
 
 For an introduction on managing your jobs with HTCondor we refer to [this](https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-part1-intro-to-htc.pdf) presentation by the OSG:
 
-###  Guidelines
+###  Job Submission Guidelines
 
 1. If your application/code was built or depends on modules used on the snowmass21 login node and it dynamically links against libraries of the module environment you would need to ensure that these modules are also availablle and loaded on the remote worker node. To do so:
     * Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will request a worker node on a site where the OSG modules are available
@@ -105,10 +104,10 @@ For an introduction on managing your jobs with HTCondor we refer to [this](https
     * Ensure your job is validated for HTCondor to run it on the OSG grid
     * Job statistics are properly collected and displayed on the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
 
-## Data Management and Grid TransfersC
+## Data Management and Grid Transfer
 
 This section describes recommendations and options for transferring data to the from remote woker nodes as part of a job submission to the OSG.
-As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There is 50TB available for Snowmass21 on the filesystem at the moment. Data can be transferred to the grid as part of an OSG job using three different methods depending on the file size.
+As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. Users will receive a 1TB quota for their personal user space, and there is a shared 50TB quota for the project space. Larger space allocations can be accommodated on a case-by-case basis. Data can be transferred to the grid as part of an OSG job using three different methods depending on the file size.
 
 1. HTCondor File Transfer. This method is recommended for the majority of computational workflows running on the OSG. Users can employ this method if the total size of the input data per job does not exceed 1 GB. In addition, OSG recommends that the output data per job that need to be transfered back does not exceed 1 GB as well. To enable HTCondor File transfers for your input and output data insert the following parameters anywhere in your HTCondor submit file:
 
@@ -125,7 +124,11 @@ To transfer data back to your collab space from the remote node run the followin
         stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
         
 3. If the filesize of each input dataset exceeds 10 GB then an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
-for a consultation to discuss if your workflow can benefit from access to a GridFTP door. 
+for a consultation to discuss if your workflow can benefit from access to a GridFTP door.
+
+## Job Examples to the OSG
+
+A list of HTCondor submission examples to the OSG with instructions for users to practice with is included here: [List of Job Examples]examples.md)
 
 ## Support and Consultation
 
