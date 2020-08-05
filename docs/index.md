@@ -118,8 +118,8 @@ As disussed above, users should place their input data for processing on the Ope
 1. HTCondor File Transfer. To enable HTCondor File transfers for your input and output data insert the following parameters
 anywhere in your condor submit file:
 
-      transfer_input_files = <comma separated files or directories>
-      transfer_output_files = <comma separated files or directories>
+     transfer_input_files = <comma separated files or directories>
+     transfer_output_files = <comma separated files or directories>
 
 This method is recommended for the majority of computational workflows running on the OSG. Users can employ this method if
 the inputdata per job does not exceed 1 GB. In addition, OSG recommends that the output data per job that need to be 
@@ -129,8 +129,8 @@ transfered back does not exceed 1 GB as well.
 You can insert the following command in your execution script to transfer data from `/collab/user/<user_id>` to the local
 directory on the remote worker node where your job is running: 
 
-      module load stashcache
-      stashcp /osgconnect/collab/user/<user_id>/<input_file> .
+     module load stashcache
+     stashcp /osgconnect/collab/user/<user_id>/<input_file> .
 
 To transfer data back to your collab space from the remote node run the following command in your execution script:
 
