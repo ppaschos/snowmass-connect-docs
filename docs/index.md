@@ -78,9 +78,7 @@ A minimal HTCondor submission script, `myjob.submit`, to the OSG is inlined belo
 
 Refer to the [HTCondor manual](https://htcondor.readthedocs.io/en/stable/users-manual/index.html) for more information on the declared parameters and on customizing your submission scripts.
 
-When the script above is submitted, the user would request a remote worker node with 1 core and 1 GB  
-to run the `run.sh` executable. In this case, `run.sh` is a shell script that contains a list of commands 
-that executes your workload on the worker node.  For example: 
+When the condor script above is submitted, the user would request a remote worker node with 1 core and 1 GB to run the `run.sh` executable. In this case, `run.sh` is a shell script that contains a list of commands that executes your workload on the worker node.  For example: 
 
     #/bin/bash
     ./code_executable <input_file> <output_file>
