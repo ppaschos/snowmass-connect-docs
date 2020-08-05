@@ -102,24 +102,20 @@ https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-
 
 1. If your application/code was built or depends on modules used on the snowmass21 login node you must 
 ensure that these modules are also loaded on the remote worker node. To do so:
-
-    * Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will 
+    a) Insert the following parameter in your submission script: `Requirements = (HAS_MODULES =?= TRUE)`. This will 
   request a worker node on a site where the OSG modules are available
-  
-    * Load the modules in the executable script, `run.sh` before you invoke your executable code as: `module load module1 module2`
+    b) Load the modules in the executable script, `run.sh` before you invoke your executable code as: `module load module1 module2`
   
 2. You must always declare your project name, `+ProjectName="snowmass21"`, in your condor submit file to:
-
-    * Ensure your job is validated for condor to run it on the OSG grid
-  
-    * Job statistics are properly collected and displayed at the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
+    a) Ensure your job is validated for condor to run it on the OSG grid
+    b) Job statistics are properly collected and displayed at the OSG monitoring dashboard for the snowmass project: `https://gracc.opensciencegrid.org/`
 
 ## Data Management and Grid Transfers
 
 This section describes recommendations and options for transferring data to the from remote woker nodes as part of a job submission to the OSG.
-As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using four different methods depending on the file size.
+As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using three different methods depending on the file size.
 
-* HTCondor File Transfer. To enable HTCondor File transfers for your input and output data insert the following parameters
+1. HTCondor File Transfer. To enable HTCondor File transfers for your input and output data insert the following parameters
 anywhere in your condor submit file:
 
       transfer_input_files = <comma separated files or directories>
@@ -129,21 +125,21 @@ This method is recommended for the majority of computational workflows running o
 the inputdata per job does not exceed 1 GB. In addition, OSG recommends that the output data per job that need to be 
 transfered back does not exceed 1 GB as well. 
 
-* OSG's StashCache. Users can use the stashcp tool to transfer data from their `/collab` space only to the remote host. 
+2. OSG's StashCache. Users can use the stashcp tool to transfer data from their `/collab` space only to the remote host. 
 You can insert the following command in your execution script to transfer data from `/collab/user/<user_id>` to the local
 directory on the remote worker node where your job is running: 
 
       module load stashcache
       stashcp /osgconnect/collab/user/<user_id>/<input_file> .
 
- To transfer data back to your collab space from the remote node run the following command in your execution script:
+To transfer data back to your collab space from the remote node run the following command in your execution script:
 
       stashcp <output_file> stash:///osgconnect/collab/user/<user_id>/<output_file>
 
 This method is recommended for input files larger than 1 GB each or 10 GB total from all input data. The recommended upper limit for
 the output files to be transfered back from the remote node is 10 GB per job.
-    
-* If the filesize of each input dataset exceeds 10 GB then an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
+
+3. If the filesize of each input dataset exceeds 10 GB then an alternative method for transfers is the GridFTP protocol using the gfal-copy tool. Please reach out 
 for a consultation to discuss if your workflow can benefit from access to a GridFTP door. 
 
 ## Support and Consultation
