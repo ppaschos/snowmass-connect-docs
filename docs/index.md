@@ -51,7 +51,7 @@ Users can transfer data from external institutions to Snowmass Connect storage u
 from your local machine to your user directory on the OSG storage. The ssh-keys used for your profile on the Snowmass Connect portal 
 must stored on the local machine.
 
-2. **rsync**. For example: `rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --progress test.transfer ppaschos@login.snowmass21.io:dump/` will copy the `test.transfer` file in the `dump/` directory in your user space. If the directory 
+2. **rsync**. For example: `rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --progress test.transfer <user_id>@login.snowmass21.io:dump/` will copy the `test.transfer` file in the `/home/<user_id>/dump/` directory. If the directory 
 does not exist, it will be created. As in `scp` the ssh-keys used for your profile on the Snowmass Connect portal 
 must stored on the source machine.
 
