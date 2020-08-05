@@ -108,7 +108,7 @@ For an introduction on managing your jobs with HTCondor we refer to [this](https
 ## Data Management and Grid TransfersC
 
 This section describes recommendations and options for transferring data to the from remote woker nodes as part of a job submission to the OSG.
-As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There's no quota on this filesystem but expect about 10TB available. Data can be transferred to the grid as part of an OSG job using three different methods depending on the file size.
+As disussed above, users should place their input data for processing on the Open Science Grid in `/collab/user/<user_id>` or `/collab/project/snowmass21`. There is 50TB available for Snowmass21 on the filesystem at the moment. Data can be transferred to the grid as part of an OSG job using three different methods depending on the file size.
 
 1. HTCondor File Transfer. This method is recommended for the majority of computational workflows running on the OSG. Users can employ this method if the total size of the input data per job does not exceed 1 GB. In addition, OSG recommends that the output data per job that need to be transfered back does not exceed 1 GB as well. To enable HTCondor File transfers for your input and output data insert the following parameters anywhere in your HTCondor submit file:
 
