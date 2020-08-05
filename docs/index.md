@@ -106,7 +106,7 @@ https://opensciencegrid.org/user-school-2019/#materials/day1/files/osgus19-day1-
   
    b) Load the modules in the executable script, `run.sh` before you invoke your executable code as: `module load module1 module2`
   
-2. You must always declare your project name, `+ProjectName="snowmass21"`, in your condor submit file to:
+2. You must always declare your project name, `+ProjectName="snowmass21"`, in your condor submission script to:
 
     a) Ensure your job is validated for condor to run it on the OSG grid
     
