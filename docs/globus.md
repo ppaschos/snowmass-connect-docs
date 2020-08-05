@@ -1,7 +1,7 @@
-# Transferring Data to OSG Storage
+# Globus Connect Instructions
 
-Data used as input for jobs to the OSG grid should be transferred to the OSG storage allocated for the Snowmass21 project
-using Globus Online. Instructions on how to set up Globus Connect Personal can be found 
+The purpose of this documentation is to provide instructions to users in using Globus Connect to move data into their directory on OSG Storage.
+Instructions on how to set up Globus Connect Personal can be found 
 [here](https://www.globus.org/globus-connect-personal). Access to the OSG storage endpoint is enabled by authenticating 
 against the Globus collection "OSG Connect CI Logon" using the GLobus Connect client. 
 You can search for the collection by name in the search bar of the File Manager.
