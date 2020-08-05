@@ -41,7 +41,7 @@ be used for scripts, submission files and small size data. Large input files for
 data in either of two subdirectories:  
     * For private user data: `/collab/user/<user_id>`  
     * For shared data among the members of the Snowmass21 collaboration:`/collab/snowmass21`
-3. Local storage in`/scratch`. *This is not available for user data at the moment. Additional storage will be*
+3. Local storage in`/scratch`. *This is not available for user data at the moment. 200 TB will be*
 *provisioned to allow users to create work directories and launch jobs from there.*
 *Users will be notified when this storage becomes available. Documentation here will be updated accordingly with more details.
 
